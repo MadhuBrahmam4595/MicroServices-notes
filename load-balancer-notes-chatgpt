@@ -1,0 +1,33 @@
+🚦 1. What is Load Balancing?
+Load Balancing means distributing incoming requests across multiple instances of the same service to:
+  => Avoid overloading one instance
+  => Improve performance and fault tolerance
+
+📌 2. Why It Matters in Microservices
+In microservices, services are typically replicated (scaled out).
+
+For example:
+Instance	      Address
+Instance 1	    localhost:8081
+Instance 2	    localhost:8082
+
+If your consumer talks only to 8081, and it goes down, the whole system suffers. A load balancer ensures that:
+✅ Requests are distributed across instances
+✅ If one fails, others continue handling requests
+
+🔧 3. Client-Side Load Balancing in Spring Cloud
+You’re already halfway there! When you use:
+
+  @FeignClient(name = "MY-SERVICE")
+or
+
+@LoadBalanced
+@Bean
+RestTemplate restTemplate() {...}
+
+Spring Cloud uses Client-Side Load Balancing with:
+  => Eureka to discover service instances
+  => Spring Cloud LoadBalancer to balance requests
+
+By default, it uses round-robin algorithm.
+
